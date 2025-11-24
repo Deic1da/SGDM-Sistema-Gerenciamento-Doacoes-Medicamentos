@@ -38,16 +38,20 @@ public class Usuario {
     @Column(name = "data_cadastro", nullable = false)
     private OffsetDateTime dataCadastro;
 
+    @ColumnDefault("now()")
+    @Column(name = "ultimo_acesso", nullable = false)
+    private OffsetDateTime ultimoAcesso;
+
     @PrePersist
     public void prePersist() {
         if (this.dataCadastro == null) {
             this.dataCadastro = OffsetDateTime.now();
         }
+        if (this.ultimoAcesso == null) {
+            this.ultimoAcesso = OffsetDateTime.now();
+        }
     }
 
-
-    @Column(name = "ultimo_acesso")
-    private OffsetDateTime ultimoAcesso;
 
     @Column(name = "cep", nullable = false, length = 9)
     private String cep;
