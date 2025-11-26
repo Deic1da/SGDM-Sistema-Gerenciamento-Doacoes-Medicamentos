@@ -7,7 +7,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/Entregas")
+@RequestMapping("/api/entregas")
 public class EntregasController {
     private final EntregasRepository EntregasRepository;
 

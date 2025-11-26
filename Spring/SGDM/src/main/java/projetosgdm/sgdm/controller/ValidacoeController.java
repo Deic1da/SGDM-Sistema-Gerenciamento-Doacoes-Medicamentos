@@ -7,7 +7,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/Validacoe")
+@RequestMapping("/api/validacoe")
 public class ValidacoeController {
     private final ValidacoeRepository ValidacoeRepository;
 

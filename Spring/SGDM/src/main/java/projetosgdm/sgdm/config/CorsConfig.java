@@ -12,7 +12,6 @@ public class CorsConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/usuarios/**").permitAll() // Libera TUDO de usuarios
                         .anyRequest().permitAll() // Liberar todas as outras rotas (para DEV) — pode ser .authenticated() depois
                 )
                 .formLogin(login -> login.disable()); // não mostra tela login padrão

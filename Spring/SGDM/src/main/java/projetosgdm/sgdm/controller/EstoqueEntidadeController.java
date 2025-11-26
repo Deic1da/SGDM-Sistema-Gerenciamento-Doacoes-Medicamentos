@@ -1,30 +1,32 @@
 package projetosgdm.sgdm.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projetosgdm.sgdm.repository.EstoqueEntidadeRepository;
-import projetosgdm.sgdm.model.EstoqueEntidade;
+
 import java.util.List;
+import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/EstoqueEntidade")
+@RequestMapping("/api/estoque-entidade")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EstoqueEntidadeController {
-    private final EstoqueEntidadeRepository EstoqueEntidadeRepository;
 
-    public EstoqueEntidadeController(EstoqueEntidadeRepository EstoqueEntidadeRepository) {
-        this.EstoqueEntidadeRepository= EstoqueEntidadeRepository;
-    }
+    @Autowired
+    private EstoqueEntidadeRepository estoqueEntidadeRepository;
 
-    @PostMapping
-    public EstoqueEntidade cadastrarEstoqueEntidade(@RequestBody EstoqueEntidade EstoqueEntidade) {
-        return EstoqueEntidadeRepository.save( EstoqueEntidade);
-    }
+    @GetMapping("/entidade/{entidadeId}")
+    public ResponseEntity<List<Map<String, Object>>> listarMedicamentosPorEntidade(
+            @PathVariable Integer entidadeId) {
 
-    @GetMapping
-    public List<EstoqueEntidade> listarEstoqueEntidade() {
-        return EstoqueEntidadeRepository.findAll();
+        System.out.println("🔍 Buscando medicamentos da entidade ID: " + entidadeId);
+
+        List<Map<String, Object>> medicamentos =
+                estoqueEntidadeRepository.findMedicamentosByEntidadeId(entidadeId);
+
+        System.out.println("📦 Encontrados " + medicamentos.size() + " medicamentos");
+
+        return ResponseEntity.ok(medicamentos);
     }
 }
-
-
-

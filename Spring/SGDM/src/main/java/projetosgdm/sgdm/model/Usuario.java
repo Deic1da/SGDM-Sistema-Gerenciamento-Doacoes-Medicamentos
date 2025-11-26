@@ -1,5 +1,6 @@
 package projetosgdm.sgdm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.time.OffsetDateTime;
 @Setter
 @Entity
 @Table(name = "usuarios")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

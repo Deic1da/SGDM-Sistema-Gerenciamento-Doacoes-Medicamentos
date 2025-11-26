@@ -1,5 +1,6 @@
 package projetosgdm.sgdm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +13,10 @@ import java.time.OffsetDateTime;
 @Setter
 @Entity
 @Table(name = "medicamentos_doacao")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class MedicamentosDoacao {
     @Id
-    @ColumnDefault("nextval('medicamentos_doacao_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -34,18 +36,20 @@ public class MedicamentosDoacao {
     @Column(name = "data_validade", nullable = false)
     private LocalDate dataValidade;
 
+    @Enumerated(EnumType.STRING)
+    @ColumnDefault("'Cadastrado'")
+    @Column(name = "status_doacao", nullable = false)
+    private StatusDoacao statusDoacao;
+
     @ColumnDefault("now()")
     @Column(name = "data_cadastro", nullable = false)
     private OffsetDateTime dataCadastro;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_entidade_destino")
     private Entidade idEntidadeDestino;
 
-/*
- TODO [Reverse Engineering] create field to map the 'status_doacao' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @ColumnDefault("'Cadastrado'")
-    @Column(name = "status_doacao", columnDefinition = "status_doacao not null")
-    private Object statusDoacao;
-*/
+    public enum StatusDoacao {
+        Cadastrado, Em_validacao, Aprovado, Rejeitado, Descartado
+    }
 }

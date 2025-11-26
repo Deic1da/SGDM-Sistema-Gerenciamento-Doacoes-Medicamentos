@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @Table(name = "estoque_entidade")
 public class EstoqueEntidade {
     @Id
-    @ColumnDefault("nextval('estoque_entidade_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -32,10 +32,11 @@ public class EstoqueEntidade {
     @Column(name = "data_entrada", nullable = false)
     private OffsetDateTime dataEntrada;
 
-/*
- TODO [Reverse Engineering] create field to map the 'status_estoque' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @Column(name = "status_estoque", columnDefinition = "status_estoque not null")
-    private Object statusEstoque;
-*/
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_estoque", nullable = false)
+    private StatusEstoque statusEstoque;
+
+    public enum StatusEstoque {
+        Disponível, Reservado, Entregue, Descartado
+    }
 }

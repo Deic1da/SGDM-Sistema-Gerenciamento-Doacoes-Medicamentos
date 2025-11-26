@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @Table(name = "validacoes")
 public class Validacoe {
     @Id
-    @ColumnDefault("nextval('validacoes_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -25,16 +25,18 @@ public class Validacoe {
     @JoinColumn(name = "id_farmaceutico_validante")
     private Farmaceutico idFarmaceuticoValidante;
 
-    @Column(name = "motivo_rejeicao")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_validacao", nullable = false)
+    private StatusValidacao statusValidacao;
+
+    @Column(name = "motivo_rejeicao", length = 255)
     private String motivoRejeicao;
+
     @ColumnDefault("now()")
     @Column(name = "data_validacao", nullable = false)
     private OffsetDateTime dataValidacao;
 
-/*
- TODO [Reverse Engineering] create field to map the 'status_validacao' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @Column(name = "status_validacao", columnDefinition = "status_validacao not null")
-    private Object statusValidacao;
-*/
+    public enum StatusValidacao {
+        Aprovado, Rejeitado
+    }
 }

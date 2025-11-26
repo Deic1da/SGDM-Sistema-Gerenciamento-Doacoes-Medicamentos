@@ -1,6 +1,7 @@
 package projetosgdm.sgdm.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +12,11 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "entidades")
 public class Entidade {
     @Id
-    @ColumnDefault("nextval('entidades_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
