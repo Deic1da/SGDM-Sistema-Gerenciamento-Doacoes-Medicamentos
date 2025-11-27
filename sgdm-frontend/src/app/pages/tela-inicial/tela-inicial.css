@@ -1,0 +1,292 @@
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #fff;
+}
+
+.header {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 14px 32px 0 32px;
+  min-height: 110px;
+  box-sizing: border-box;
+}
+
+.headers {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.header-cima {
+  display: flex;
+  width: 100%;
+  height: 124px;
+  justify-content: center;
+  align-items: center;
+  gap: 90rem;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 70px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -1.6px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Ícones */
+.icon-btn {
+  background: #fff;
+  border: 1.2px solid #e0e0e0;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.user-icon {
+  background: #6750a4;
+  color: #fff;
+  border: none;
+}
+
+.icon-btn:hover {
+  background: #ece6fd;
+}
+
+.header-baixo {
+  display: flex;
+  flex-direction: row;
+  padding: 0 20px;
+  align-items: center;
+  gap: 600px;
+  flex-shrink: 0;
+  margin: 0px 0px 10px 0px;
+}
+
+.input-busca {
+  padding: 7px 16px;
+  font-size: 15px;
+  border-radius: 24px;
+  border: 1px solid #ccc;
+  width: 200px;
+  background: #fafaff;
+  height: 26px;
+}
+
+.doar-btn, .top-btn {
+  background: #ece6fd;
+  color: #444;
+  border: none;
+  border-radius: 14px;
+  padding: 8px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-left: 8px;
+}
+
+.doar-btn {
+  background: #6750a4;
+  color: #fff;
+}
+
+.doar-btn:hover {
+  background: #4f3d8c;
+}
+
+.top-btn:hover {
+  background: #ddd1fa;
+  color: #222;
+}
+
+/* Se quiser o grupo dos botões separados */
+.headers > div:last-child {
+  display: flex;
+  flex-direction: row;
+  gap: 63rem;
+  margin-top: 6px;
+}
+
+/* MAPA E LISTA LATERAL */
+.map-list-row {
+  display: flex;
+  flex: 1 1 0;
+  width: 100vw;
+  height: calc(100vh - 110px);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.mapa {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+}
+
+google-map {
+  flex: 1 1 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  min-height: 0;
+  border-radius: 0 0 0 16px;
+}
+
+.collection-list {
+  width: 340px;
+  min-width: 260px;
+  max-width: 340px;
+  background: #fff;
+  box-shadow: -1px 0 16px 0 #e5e5e5;
+  padding: 22px 14px 14px 14px;
+  height: 100%;
+  overflow-y: auto;
+  border-radius: 0 0 16px 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.collection-item,
+.collection-item.selected {
+  border: 1.2px solid #b2a7c7;
+  padding: 12px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #fff;
+  color: #222;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.18s;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0 0 8px 0;
+  box-sizing: border-box;
+  height: auto;
+}
+
+.collection-item.selected {
+  border: 2px solid #6750a4;
+  color: #6750a4;
+  background: #ece6fd;
+  font-weight: 600;
+  box-shadow: 0 1px 8px 0 #d6cfff7c;
+}
+
+.local-nome {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.distance-label {
+  font-size: 0.98em;
+  color: #6750a4;
+  margin-bottom: 2px;
+}
+
+/* CLASSES PARA CONTROLE DOS BOTÕES */
+.botao-roxo {
+  background: #6750a4 !important;
+  color: #fff !important;
+}
+
+.botao-vermelho {
+  background: #e53935 !important;
+  color: #fff !important;
+}
+
+.botao-roxo:hover {
+  background: #5640a0 !important;
+}
+
+.botao-vermelho:hover {
+  background: #c62828 !important;
+}
+
+/* CONTAINER DOS BOTÕES COM LISTA */
+.botoes-container {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+/* ✅ WRAPPER PARA BOTÃO + LISTA */
+.botao-com-lista {
+  position: relative;
+  display: inline-block;
+}
+
+/* LISTA DE ENTIDADES DO RT */
+.lista-entidades-rt {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  max-width: 350px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.titulo-lista {
+  padding: 12px 16px;
+  background: #6750a4;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.item-entidade-rt {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.item-entidade-rt:last-child {
+  border-bottom: none;
+}
+
+.item-entidade-rt:hover {
+  background: #ece6fd;
+  color: #6750a4;
+  font-weight: 500;
+}

@@ -1,0 +1,125 @@
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+<div class="main-container" (click)="fecharSeClicarFora()">
+  <!-- HEADER -->
+  <header class="headers">
+    <div class="header-cima">
+      <div>
+        <span class="logo">SGDM</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn">
+          <span class="material-icons">settings</span>
+        </button>
+        <button class="icon-btn user-icon">
+          <span class="material-icons">person</span>
+        </button>
+      </div>
+    </div>
+    <div class="header-baixo">
+      <div>
+        <input class="input-busca" placeholder="Pesquisar Medicamento" />
+        <button class="doar-btn">Doar Medicamento</button>
+      </div>
+      <div class="botoes-container">
+        <!-- WRAPPER para botão + lista RT -->
+        <div class="botao-com-lista" (click)="$event.stopPropagation()">
+          <button
+            class="top-btn"
+            [class.botao-vermelho]="!usuarioEhRT"
+            [class.botao-roxo]="usuarioEhRT"
+            (click)="areaDoFarmaceutico(); $event.stopPropagation()">
+            Área do Farmacêutico
+          </button>
+
+          <!-- Lista de entidades RT -->
+          <div *ngIf="(areaRTService.mostrarLista$ | async) && ((areaRTService.entidadesRT$ | async) || []).length > 0"
+            class="lista-entidades-rt"
+            (click)="$event.stopPropagation()">
+            <div class="titulo-lista">Selecione uma entidade:</div>
+            <div
+              *ngFor="let entidade of (areaRTService.entidadesRT$ | async) || []"
+              class="item-entidade-rt"
+              (click)="selecionarEntidadeRT(entidade)">
+              {{ entidade.razaoSocial }}
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="top-btn"
+          [class.botao-vermelho]="!usuarioTemEntidade"
+          [class.botao-roxo]="usuarioTemEntidade"
+          (click)="gerenciarPontoDeColeta()">
+          Gerenciar Ponto de Coleta
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="map-list-row">
+    <!-- MAPA -->
+    <div class="mapa">
+      <google-map
+        height="100%"
+        width="100%"
+        [center]="center"
+        [zoom]="zoom"
+        (mapReady)="onMapReady()"
+      >
+        <!-- markers -->
+        <map-marker
+          *ngIf="meuMarcador"
+          [position]="meuMarcador"
+          [icon]="{ url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}"
+        ></map-marker>
+
+        <map-marker
+          *ngFor="let ponto of pontosColeta"
+          [position]="{ lat: ponto.latitude, lng: ponto.longitude }"
+          [icon]="{
+            url: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'
+          }">
+        </map-marker>
+
+        <!-- rota polyline -->
+        <map-polyline
+          *ngIf="rotas.length > 0"
+          [path]="rotas"
+          [options]="{ strokeColor: '#de336e', strokeOpacity: 0.9, strokeWeight: 6 }">
+        </map-polyline>
+      </google-map>
+    </div>
+
+    <!-- LISTA LATERAL -->
+    <div class="collection-list">
+      <h3 style="text-align: center; margin: 0 0 12px 0; font-size: 1.1em; color: #333;">
+        Pontos de Coleta Próximos
+      </h3>
+      <div
+        *ngFor="let ponto of pontosColeta; let i = index"
+        class="collection-item"
+        [class.selected]="selectedIndex === i"
+        (click)="selecionarPonto(i); tracarRota(i)">
+        <div class="local-nome" [ngStyle]="{'font-weight': selectedIndex === i ? 700 : 600, 'color': selectedIndex === i ? '#6c339d' : '#222'}">
+          {{ ponto.razaoSocial }}
+        </div>
+        <div *ngIf="ponto.distanciaTexto && ponto.duracaoTexto" class="distance-label" style="font-size: 0.95em; color: #555;">
+          {{ ponto.distanciaTexto }} ({{ ponto.duracaoTexto }})
+        </div>
+        <a
+          [href]="'https://www.google.com/maps/dir/?api=1&destination=' + ponto.latitude + ',' + ponto.longitude"
+          target="_blank"
+          rel="noopener"
+          style="color: #1976d2; text-decoration: underline; margin-top: 2px; display: inline;"
+          (click)="$event.stopPropagation()"
+        >
+          Abrir no Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+# Angular e Node
+**/node_modules/
+**/.angular/
+**/dist/
+**/.vscode/

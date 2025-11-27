@@ -1,0 +1,148 @@
+.cadastro-usuario {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #fff;
+  display: flex;
+  align-items: center;     /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+}
+
+.informacoes-de-cadastro {
+  width: 1200px;           /* Ajuste conforme seu design */
+  min-height: 700px;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  box-shadow: 0 4px 32px 0 #0001;
+  border-radius: 24px;
+  align-items: stretch;    /* estica filhos na vertical */
+  justify-content: center;
+}
+
+.login-parent,
+.cadastro-parent {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+/* LINHA NO MEIO */
+.informacoes-de-cadastro-child {
+  width: 1px;
+  height: 700px;
+  background: #1f1e1e;
+  margin: 0 40px;
+  align-self: center;     /* pega toda a altura do container */
+}
+
+.login,
+.cadastro {
+  font-size: 48px;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.input-field-parent,
+.input-field-group {
+  width: 100%;
+}
+
+/* linhas de dois campos no cadastro */
+.input-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.input-field3,
+.input-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* labels dos campos */
+.input label,
+.input-field label {
+  font-size: 1em;
+  color: #222;
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+/* inputs LOGIN e CADASTRO com mesmo estilo */
+.input input,
+.input-field input,
+.input-field3 input {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #fafaff;
+  font-size: 1em;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* botão Entrar e Finalizar Cadastro */
+/* diminui ~10% o padding lateral */
+button.login-btn,
+.cadastro-btn {
+  background: #6750a4;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 10px 32px;      /* era 12px 40px, agora menor */
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 12px 0 #42218025;
+}
+
+button.login-btn:hover,
+.cadastro-btn:hover {
+  background: #4f3d8c;
+}
+
+/* texto Mostrar Senha / Manter Login */
+.checkbox,
+.mostrar-senha {
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+}
+
+/* linha “Mostrar senha” alinhada no meio do campo senha */
+.login-mostrar-senha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* linha com “Manter login” + botão Entrar, centralizada na coluna */
+.login-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centraliza tudo na coluna */
+  gap: 16px;
+  margin-top: 18px;
+}
+
+/* botão de cadastro centralizado no bloco da direita */
+.button2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}

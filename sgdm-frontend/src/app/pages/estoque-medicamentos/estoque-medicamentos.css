@@ -1,0 +1,291 @@
+.container-estoque {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Inter', 'Poppins', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* CABEÇALHO: Apenas título */
+.cabecalho-flexbox {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.titulo-secao h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+/* Campo de busca acima da tabela, alinhado à direita */
+.busca-acima-tabela {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.busca-wrapper {
+  position: relative;
+  width: 240px;
+}
+
+.input-busca {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #f9fbff;
+  font-size: 12px;
+  color: #404b52;
+  box-sizing: border-box;
+}
+
+.input-busca::placeholder {
+  color: #b5b7c0;
+}
+
+.icone-busca {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #b5b7c0;
+}
+
+/* CONTEÚDO PRINCIPAL: Tabela + Painel Lateral */
+.conteudo-flexbox {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+
+/* ÁREA DA TABELA */
+.area-tabela {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.tabela-medicamentos {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.tabela-medicamentos thead tr {
+  border-bottom: 1px solid #eee;
+}
+
+.tabela-medicamentos th {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #292d32;
+}
+
+.tabela-medicamentos tbody tr {
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tabela-medicamentos tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.tabela-medicamentos tbody tr.linha-selecionada {
+  background: rgba(95, 29, 146, 0.15);
+}
+
+.tabela-medicamentos td {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #292d32;
+}
+
+.badge-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.status-disponivel {
+  background: rgba(22, 192, 152, 0.38);
+  border-color: #00b087;
+  color: #008767;
+}
+
+.status-reservado {
+  background: #faffdb;
+  border-color: #bf9d14;
+  color: #bf9d14;
+}
+
+.status-entregue {
+  background: #c4efff;
+  border-color: #02a4c0;
+  color: #02a4c0;
+}
+
+.status-descartado {
+  background: #ffc5c5;
+  border-color: #df0404;
+  color: #df0404;
+}
+
+/* PAGINAÇÃO */
+.paginacao-flexbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.info-paginacao {
+  font-size: 14px;
+  color: #b5b7c0;
+}
+
+.botoes-paginacao {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-pagina {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background: #f5f5f5;
+  color: #404b52;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-pagina:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.btn-pagina.pagina-ativa {
+  background: #8c21b7;
+  border-color: #8c21b7;
+  color: #fff;
+}
+
+.btn-pagina:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* PAINEL LATERAL */
+.painel-lateral {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-acao {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label-campo {
+  font-size: 16px;
+  color: #1e1e1e;
+  font-weight: 500;
+}
+
+.input-campo,
+.textarea-campo {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  font-size: 16px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.textarea-campo {
+  resize: vertical;
+  min-height: 80px;
+  color: #404b52;
+}
+
+.textarea-campo::placeholder {
+  color: #9f9c9c;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.checkbox-container label {
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+}
+
+.btn-entrega,
+.btn-descarte {
+  padding: 12px 24px;
+  border-radius: 100px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-entrega {
+  background: #6750a4;
+}
+
+.btn-entrega:hover:not(:disabled) {
+  background: #5640a0;
+}
+
+.btn-descarte {
+  background: #df0404;
+}
+
+.btn-descarte:hover:not(:disabled) {
+  background: #c20303;
+}
+
+.btn-entrega:disabled,
+.btn-descarte:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

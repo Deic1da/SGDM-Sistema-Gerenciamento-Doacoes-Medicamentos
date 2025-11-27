@@ -1,0 +1,114 @@
+<div class="cadastro-ponto-de-coleta">
+  <div class="informacoes-de-cadastro">
+    <div class="cadastro-ponto-de-coleta-parent">
+      <h1 class="cadastro-ponto-de">Cadastro Ponto de Coleta</h1>
+
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+        <div class="frame-parent">
+
+          <!-- Dados do Ponto de Coleta -->
+          <div class="texto-parent">
+            <div class="texto">Dados do Ponto de Coleta</div>
+
+            <div class="input-field">
+              <label class="label">Razão Social</label>
+              <input class="input" type="text" formControlName="razaoSocial" placeholder="XXXXXXXX">
+            </div>
+
+            <div class="input-field">
+              <label class="label">Nome Fantasia</label>
+              <input class="input" type="text" formControlName="nomeFantasia" placeholder="XXXXXXXXXX">
+            </div>
+
+            <div class="input-field3">
+              <label class="label">CNPJ</label>
+              <input class="input" type="text" formControlName="cnpj"
+                     mask="00.000.000/0000-00" placeholder="XX.XXX.XXX/XXXX-XX">
+            </div>
+          </div>
+
+          <div class="frame-child"></div>
+
+          <!-- Mapa -->
+          <div class="texto-mapa-parent">
+            <div class="texto-mapa">Marque o Local no Mapa</div>
+
+            <div class="search">
+              <input type="text" [(ngModel)]="enderecoSearch" [ngModelOptions]="{standalone: true}"
+                     placeholder="Pesquisar Endereço" (keyup.enter)="buscarEndereco()">
+              <button type="button" class="search2" (click)="buscarEndereco()">
+                <span class="material-icons">search</span>
+              </button>
+            </div>
+
+            <google-map
+              [center]="mapCenter"
+              [zoom]="mapZoom"
+              [options]="mapOptions"
+              (mapClick)="onMapClick($event)"
+              width="400px"
+              height="350px">
+              <map-marker *ngIf="markerPosition" [position]="markerPosition"></map-marker>
+            </google-map>
+          </div>
+
+          <div class="frame-child"></div>
+
+
+
+          <!-- Dados do Farmacêutico -->
+          <div class="texto-parent">
+            <div class="texto">Dados do<br>Farmacêutico Responsável</div>
+
+            <div class="input-field">
+              <label class="label">Nome</label>
+              <input class="input" type="text" formControlName="nomeFarmaceutico" placeholder="XXXXXXXX">
+            </div>
+
+            <div class="input-field">
+              <label class="label">CPF</label>
+              <input class="input" type="text" formControlName="cpfFarmaceutico"
+                     mask="000.000.000-00" placeholder="XXX.XXX.XXX-XX">
+            </div>
+
+            <div class="input-field3">
+              <label class="label">Nº de Inscrição no CRF</label>
+              <input class="input" type="text" formControlName="numCrf" placeholder="XXXXXXXX">
+            </div>
+          </div>
+        </div>
+
+        <!-- Horários e checkbox -->
+        <div class="frame-group">
+          <div class="checkboxes-parent">
+            <input type="checkbox" id="validadeCurta" formControlName="aceitaValidadeCurta">
+            <label for="validadeCurta" class="aceita-validade-curta">
+              Aceita Validade Curta (7 dias)
+            </label>
+          </div>
+
+          <div class="horrio-de-abertura-parent">
+            <div class="horrio-de-abertura">Horário de Abertura</div>
+            <div class="group-wrapper">
+              <input type="time" formControlName="horarioAbertura" value="07:30">
+            </div>
+          </div>
+
+          <div class="horrio-de-abertura-parent">
+            <div class="horrio-de-fechamento">Horário de Fechamento</div>
+            <div class="group-wrapper">
+              <input type="time" formControlName="horarioFechamento" value="19:30">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="button" [disabled]="isSubmitting || cadastroForm.invalid">
+          <span class="label7">
+            {{ isSubmitting ? 'Enviando...' : 'Finalizar Cadastro' }}
+          </span>
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>

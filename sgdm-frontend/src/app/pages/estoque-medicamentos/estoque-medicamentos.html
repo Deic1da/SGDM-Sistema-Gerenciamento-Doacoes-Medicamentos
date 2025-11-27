@@ -1,0 +1,141 @@
+<div class="container-estoque">
+  <!-- CABEÇALHO: Apenas o Título -->
+  <div class="cabecalho-flexbox">
+    <div class="titulo-secao">
+      <h1>Estoque de Medicamentos</h1>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL: Tabela + Painel Lateral -->
+  <div class="conteudo-flexbox">
+    <!-- ÁREA DA TABELA -->
+    <div class="area-tabela">
+      <!-- Campo de busca acima da tabela, alinhado à direita -->
+      <div class="busca-acima-tabela">
+        <div class="busca-wrapper">
+          <span class="icone-busca">🔍</span>
+          <input
+            type="text"
+            class="input-busca"
+            placeholder="Pesquisar Medicamento"
+            [(ngModel)]="termoBusca"
+            (input)="aplicarFiltro()">
+        </div>
+      </div>
+
+      <table class="tabela-medicamentos">
+        <thead>
+          <tr>
+            <th>Medicamento</th>
+            <th>Forma</th>
+            <th>Validade</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let med of medicamentosPaginados"
+            [class.linha-selecionada]="medicamentoSelecionado?.id === med.id"
+            (click)="selecionarMedicamento(med)">
+            <td>{{ med.nomeMedicamento }}</td>
+            <td>{{ med.forma }}</td>
+            <td>{{ med.dataValidade }}</td>
+            <td>
+              <span [class]="getStatusClass(med.status)" class="badge-status">
+                {{ getStatusTexto(med.status) }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- PAGINAÇÃO -->
+      <div class="paginacao-flexbox">
+        <div class="info-paginacao">
+          Exibindo dados de {{ (paginaAtual - 1) * itensPorPagina + 1 }}
+          a {{ itemFinal }}
+          de {{ totalItens }} entradas.
+        </div>
+
+        <div class="botoes-paginacao">
+          <button
+            class="btn-pagina"
+            (click)="irParaPagina(paginaAtual - 1)"
+            [disabled]="paginaAtual === 1">
+            &lt;
+          </button>
+
+          <button
+            *ngFor="let p of paginasVisiveis"
+            class="btn-pagina"
+            [class.pagina-ativa]="p === paginaAtual"
+            (click)="irParaPagina(p)">
+            {{ p }}
+          </button>
+
+          <span *ngIf="totalPaginas > 5 && paginaAtual < totalPaginas - 2">...</span>
+
+          <button
+            *ngIf="totalPaginas > 5"
+            class="btn-pagina"
+            [class.pagina-ativa]="paginaAtual === totalPaginas"
+            (click)="irParaPagina(totalPaginas)">
+            {{ totalPaginas }}
+          </button>
+
+          <button
+            class="btn-pagina"
+            (click)="irParaPagina(paginaAtual + 1)"
+            [disabled]="paginaAtual === totalPaginas">
+            &gt;
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL LATERAL -->
+    <div class="painel-lateral">
+      <!-- REGISTRAR ENTREGA -->
+      <div class="card-acao">
+        <label class="label-campo">CPF do Destinatário</label>
+        <input
+          type="text"
+          class="input-campo"
+          placeholder="XXX.XXX.XXX-XX"
+          [(ngModel)]="cpfDestinatario">
+
+        <button
+          class="btn-entrega"
+          (click)="registrarEntrega()"
+          [disabled]="!medicamentoSelecionado || !cpfDestinatario">
+          Registrar Entrega
+        </button>
+      </div>
+
+      <!-- REGISTRAR DESCARTE -->
+      <div class="card-acao">
+        <textarea
+          class="textarea-campo"
+          placeholder="Outro Motivo de Descarte"
+          [(ngModel)]="motivoDescarte"
+          [disabled]="foraValidade"
+          rows="3"></textarea>
+
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="foraValidade"
+            [(ngModel)]="foraValidade">
+          <label for="foraValidade">Fora da Validade</label>
+        </div>
+
+        <button
+          class="btn-descarte"
+          (click)="registrarDescarte()"
+          [disabled]="!medicamentoSelecionado || (!foraValidade && !motivoDescarte)">
+          Registrar Descarte
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

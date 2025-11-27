@@ -1,0 +1,220 @@
+<div class="cadastro-usuario">
+  <div class="informacoes-de-cadastro">
+    <!-- ESQUERDA: LOGIN -->
+    <div class="login-parent">
+      <div class="login">Login</div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="input-field-parent">
+          <!-- E-mail -->
+          <div class="input-field">
+            <label>E-mail</label>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="XXXXXX@XXXX.XXX"
+            />
+          </div>
+
+          <!-- Senha -->
+          <div class="input-field">
+            <label>Senha</label>
+            <input
+              [type]="mostrarLoginSenha ? 'text' : 'password'"
+              formControlName="senha"
+              placeholder="XXXXXXX"
+            />
+          </div>
+
+          <!-- Mostrar senha (logo abaixo da senha) -->
+          <div class="login-mostrar-senha">
+            <input
+              type="checkbox"
+              id="mostrarLoginSenha"
+              (change)="mostrarLoginSenha = !mostrarLoginSenha"
+            />
+            <label
+              for="mostrarLoginSenha"
+              style="margin-left: 6px; font-size: 12px;"
+              >Mostrar Senha</label
+            >
+          </div>
+
+          <!-- Manter login + Entrar, na mesma linha e centralizados -->
+          <div class="login-actions">
+            <div style="display: flex; align-items: center;">
+              <input type="checkbox" id="manterLogin" />
+              <label
+                for="manterLogin"
+                style="margin-left: 6px; font-size: 14px;"
+                >Manter Login</label
+              >
+            </div>
+            <button type="submit" class="login-btn">Entrar</button>
+          </div>
+        </div>
+
+        <!-- Mensagens login -->
+        <div
+          *ngIf="loginErro"
+          style="color: red; font-size: 0.9em; text-align: center; margin-top: 8px;"
+        >
+          {{ loginErro }}
+        </div>
+        <div
+          *ngIf="loginSucesso"
+          style="color: green; font-size: 0.9em; text-align: center; margin-top: 8px;"
+        >
+          {{ loginSucesso }}
+        </div>
+      </form>
+    </div>
+
+    <!-- LINHA DIVISÓRIA -->
+    <div class="informacoes-de-cadastro-child"></div>
+
+    <!-- DIREITA: CADASTRO -->
+    <div class="cadastro-parent">
+      <div class="cadastro">Cadastro</div>
+
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+        <div class="frame-container">
+          <div class="input-field-group">
+            <!-- Linha 1: Email / CEP -->
+            <div class="input-row">
+              <div class="input-field3">
+                <label>E-mail</label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  placeholder="XXXXXX@XXXX.XXX"
+                />
+              </div>
+              <div class="input-field3">
+                <label>CEP</label>
+                <input
+                  type="text"
+                  formControlName="cep"
+                  placeholder="XXXX-XXX"
+                />
+              </div>
+            </div>
+
+            <!-- Linha 2: CPF / Estado -->
+            <div class="input-row">
+              <div class="input-field3">
+                <label>CPF</label>
+                <input
+                  type="text"
+                  formControlName="cpf"
+                  placeholder="XXX.XXX.XXX-XX"
+                />
+              </div>
+              <div class="input-field3">
+                <label>Estado</label>
+                <input
+                  type="text"
+                  formControlName="estado"
+                  placeholder="XXXXXXXXX"
+                />
+              </div>
+            </div>
+
+            <!-- Linha 3: Nome / Município -->
+            <div class="input-row">
+              <div class="input-field3">
+                <label>Nome</label>
+                <input
+                  type="text"
+                  formControlName="nomeCompleto"
+                  placeholder="XXXXXXX XXXXXXX XXXX"
+                />
+              </div>
+              <div class="input-field3">
+                <label>Município</label>
+                <input
+                  type="text"
+                  formControlName="municipio"
+                  placeholder="XXXXXXXX"
+                />
+              </div>
+            </div>
+
+            <!-- Linha 4: Telefone / Bairro -->
+            <div class="input-row">
+              <div class="input-field3">
+                <label>Telefone</label>
+                <input
+                  type="text"
+                  formControlName="telefone"
+                  placeholder="(XX) X XXXX-XXXX"
+                />
+              </div>
+              <div class="input-field3">
+                <label>Bairro</label>
+                <input
+                  type="text"
+                  formControlName="bairro"
+                  placeholder="XXXXXX"
+                />
+              </div>
+            </div>
+
+            <!-- Linha 5: Senha / Logradouro -->
+            <div class="input-row">
+              <div class="input-field3">
+                <label>Senha</label>
+                <input
+                  [type]="mostrarSenha ? 'text' : 'password'"
+                  formControlName="senhaHash"
+                  placeholder="XXXXXXX"
+                />
+              </div>
+              <div class="input-field3">
+                <label>Logradouro</label>
+                <input
+                  type="text"
+                  formControlName="logradouro"
+                  placeholder="XXXXXXX"
+                />
+              </div>
+            </div>
+
+            <!-- Linha 6: Confirmar Senha / Número -->
+            <div class="input-row">
+              <div class="input-field3">
+                <label>Confirmar Senha</label>
+                <input
+                  [type]="mostrarConfirmarSenha ? 'text' : 'password'"
+                  formControlName="confirmarSenha"
+                  placeholder="XXXXXXXX"
+                />
+              </div>
+              <div class="input-field3">
+                <label>Número</label>
+                <input
+                  type="text"
+                  formControlName="numero"
+                  placeholder="XXXXX"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensagens cadastro -->
+        <div *ngIf="mensagemErro" style="color: red; font-size: 0.9em;">
+          {{ mensagemErro }}
+        </div>
+        <div *ngIf="mensagemSucesso" style="color: green; font-size: 0.9em;">
+          {{ mensagemSucesso }}
+        </div>
+
+        <!-- Botão de finalizar cadastro centralizado -->
+        <div class="button2">
+          <button type="submit" class="cadastro-btn">Finalizar Cadastro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
